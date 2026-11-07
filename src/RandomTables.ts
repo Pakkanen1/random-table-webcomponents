@@ -12,6 +12,7 @@ export class RandomTables extends LitElement {
     }
     button {
       background-color: #655bff;
+      border-radius: 5px;
       border: none;
       color: white;
       padding: 0.3em;
@@ -70,6 +71,10 @@ export class RandomTables extends LitElement {
         this.requestUpdate()
   }
 
+  removeRandomTableItem(index: number) {
+    this.randomTableItems = this.randomTableItems.filter((_, itemIndex) => itemIndex !== index);
+  }
+
   render() {
     const tableNames = [];
     for (const i of this.randomTableNames) {
@@ -77,7 +82,9 @@ export class RandomTables extends LitElement {
           <button @click=${() => this.fetchRandomTableItem(i)}>${i}</button>
         `);
     }
-    const tableItems = this.randomTableItems.map(item => html`<li>${item}</li>`);
+    const tableItems = this.randomTableItems.map((item, index) => html`
+      <li @click=${() => this.removeRandomTableItem(index)}>${item}</li>
+    `);
 
     return html`
       <h2>Random Table Master Panel</h2>
