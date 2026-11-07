@@ -10,6 +10,34 @@ export class RandomTables extends LitElement {
       padding: 0px;
       color: var(--random-tables-text-color, #000);
     }
+    button {
+      background-color: #655bff;
+      border: none;
+      color: white;
+      padding: 0.3em;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    ul {
+      font-family: Tahoma, Verdana, Arial, sans-serif;
+      font-weight: bold;
+    }
+    .table-items {
+      display: flex;
+      flex-wrap: wrap;
+      list-style-type: none;
+    }
+    .table-items li {
+      margin: 0.2em;
+      padding: 0.2em;
+      background-color: #fff;
+      border: 1px solid #000;
+    }
   `;
 
   @property({ type: Array, attribute: "random-table-names" }) randomTableNames: Array<string> = [];
@@ -49,11 +77,12 @@ export class RandomTables extends LitElement {
           <button @click=${() => this.fetchRandomTableItem(i)}>${i}</button>
         `);
     }
+    const tableItems = this.randomTableItems.map(item => html`<li>${item}</li>`);
 
     return html`
       <h2>Random Table Master Panel</h2>
-      <ul>${tableNames}</ul>
-      <p>${this.randomTableItems.join(' | ')}</p>
+      <ul class="table-names">${tableNames}</ul>
+      <ul class="table-items">${tableItems}</ul>
     `;
   }
   
